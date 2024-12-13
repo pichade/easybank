@@ -1,0 +1,203 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MainNav from '../components/structure/MainNav.astro'
+import Features from '../components/content/Features.astro';
+import LatestArticles from '../components/content/LatestArticles.astro';
+import Footer from '../components/structure/Footer.astro'
+import PrimaryBtn from '../components/utils/PrimaryBtn.astro';
+
+---
+
+<BaseLayout>
+
+	<MainNav /> 
+
+		<header class="hero">
+
+				<div class="hero-content container">
+
+					<div class="hero-content-left">
+						<h1>Next generation digital banking</h1>
+						<p>Take your financial life online. Your Easybank account will be a one-stop-shop for spending, saving, budgeting, investing, and much more.</p>
+						<PrimaryBtn>Request Invite</PrimaryBtn>
+					</div>
+
+					<div class="hero-content-right">
+						<img src="/images/hero/image-mockups.png" alt="hero-image">
+					</div>
+			</div>
+
+		</header>
+
+	<main>
+
+		<section aria-labelledby="features" class="grey-section features-section">
+
+			<div class="container">
+				<h2 id="features">Why choose Easybank?</h2>
+				<p>We leverage Open Banking to turn your bank account into your financial hub. Control your finances like never before.</p>
+				<div class="features-grid grid-flow">
+					<Features/>
+				</div>
+			</div>
+
+		</section>
+
+		<section aria-labelledby="articles" class="lastest-articles container">
+
+			<h2 id="articles">Latest Articles</h2>
+
+			<div class="articles-grid grid-flow">
+				<LatestArticles/>
+			</div>
+
+		</section>
+ 
+
+	</main>
+
+	<Footer /> 
+
+</BaseLayout>
+
+
+<style>
+
+
+	.hero{
+		margin-inline: auto;
+		background: url("/images/hero/bg-intro-mobile.svg") no-repeat;
+		background-size: 100% 398px;
+		background-position: right -56px; 
+	}
+
+	.hero-content{
+		position: relative;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.hero-content-left{
+		max-width: 100%;
+		display: grid;
+		justify-items: center;
+		text-align: center;
+		gap: 1.5rem;
+		margin-block: 5.5rem;
+		order: 2;
+	}
+
+	.hero-content-right{
+		order: 1;
+		height: 224px;
+	}
+
+	.hero-content-right img{
+		display: block;
+		position: relative;
+		width: 327px;
+		top: -116px;
+		margin-inline: auto;
+	}
+
+
+	.grey-section{
+		background-color: var(--clr-light-grayish-blue);
+	}
+
+	main section {
+    	padding-block: 4rem;
+	}
+	
+
+	.features-section{
+		text-align: center;
+	}
+
+	.features-grid{
+		margin-block-start: 3.5rem;
+        justify-items: center;
+	}
+
+
+	.articles-grid {
+		margin-block-start: 3.5rem;
+        margin-inline: auto;
+		--gap: 2.5rem;
+
+	}
+
+	@media(min-width:760px) {
+
+	.features-section{
+		text-align: start;
+
+		& p{
+			max-width: 60ch;
+		}
+	}
+
+        .features-grid{
+            grid-template-columns: repeat(2,1fr);
+			--gap:2rem;
+        }
+
+		.articles-grid{
+            grid-template-columns: repeat(2,1fr);
+        }
+
+		main section {
+    padding-block: 6rem;
+}
+
+    .hero{
+		max-width: var(--container-width);
+		background: url("/images/hero/bg-intro-desktop.svg") no-repeat;
+		background-size: auto;
+		background-position: 624px -262px; 
+	}
+
+	.hero-content{
+		flex-direction: row;
+	}
+
+	.hero-content-left{
+		max-width: 46ch;
+		justify-items: start;
+		align-items: flex-start;
+		text-align: start;
+		grid-auto-rows: max-content;
+	}
+
+	.hero-content-right img{
+		position: absolute;
+		width: 550px;
+		right: -290px;
+		top: -124px;
+	}
+
+	}
+
+	@media(min-width:975px){
+
+		.hero-content-left{
+
+		margin-block: 10.625rem;
+		}
+
+		.hero-content-right img{
+			width: 766px;
+		}
+	}
+
+	@media(min-width:1100px) {
+
+        .features-grid,
+		.articles-grid{
+            grid-template-columns: repeat(4,1fr);
+        }
+
+    }
+
+
+</style>

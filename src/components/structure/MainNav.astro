@@ -1,0 +1,261 @@
+---
+import PrimaryBtn from "../utils/PrimaryBtn.astro";
+
+---
+
+
+<div class="nav">
+
+    <nav class="main-nav flex-row container">
+
+        <img src="/images/logo/logo.svg" alt="easybank logo" class="nav-logo">
+
+        <ul class="menu menu-hidden">
+            <li><a href="/">Home</a></li>
+            <li><a href="/">About</a></li>
+            <li><a href="/">Contact</a></li>
+            <li><a href="/">Blog</a></li>
+            <li><a href="/">Careers</a></li>
+        </ul>
+
+
+        <div class="nav-btns">
+            <PrimaryBtn>Request Invite</PrimaryBtn>
+            <button><img src="/images/icons/ui/icon-hamburger.svg" alt="Button to open mobile menu" aria-label="Open Menu" class="btn-open-menu"></button>
+            <button><img src="/images/icons/ui/icon-close.svg" alt="Button to close mobile menu" aria-label="Close Menu" class="btn-close-menu hidden-menu-btn"></button>
+        </div>
+
+       
+
+    </nav>
+</div>
+
+ <div class="mobile-menu-bg mobile-menu-bg-hidden"></div>
+
+<style>
+
+    .nav{
+        position: relative;
+        background: var(--clr-white);
+        height: 80px;
+        z-index: 100;
+    }
+
+    .main-nav{
+        justify-content:space-between ;
+        align-items: center;
+        height: inherit;
+    }
+
+    .nav-logo{
+        height: 20px;
+    }
+
+    .menu{
+        width: calc(100vw - 2rem);
+        padding: 2rem;
+        background-color: var(--clr-white);
+        border-radius: 4px;
+        text-align: center;
+
+        position: absolute;
+        top: 88px;
+        left: 50%;
+        translate: -50% 0;
+    }
+
+    .menu li:not(:last-child){
+        margin-bottom: 1.5rem;
+    }
+
+    .menu li{
+        transition: color 0.3s ease;
+    }
+
+    .menu li:hover{
+        color: var(--clr-lime-green);
+    }
+
+    .menu-hidden{
+        display: none;
+        animation: closeMenu 0.4s ease;
+    }
+
+    .menu-visible{
+        display: block;
+        animation: openMenu 0.4s ease;
+    }
+
+
+    @keyframes openMenu{
+        from{
+            opacity: 0;
+            transform: translateY(-1rem);
+        }
+        to{
+            opacity: 1;
+            transform: translateY(0rem);
+        }
+    }
+
+    @keyframes closeMenu{
+        from{
+            display: block;
+            opacity: 1;
+            transform: translateY(0rem);
+        }
+        to{
+            display: none;
+            opacity: 0;
+            transform: translateY(-1rem);
+        }
+    } 
+
+
+    .nav-btns :not(:first-child){
+        border: 0;
+        background: none;
+    }
+
+    .btn{
+        display: none;
+    }
+
+    .hidden-menu-btn{
+        display: none;
+    }
+
+    .mobile-menu-bg{
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: linear-gradient(
+            0deg,
+            hsl(from var(--clr-dark-blue) h s l /0.1),
+            var(--clr-dark-blue)
+        );
+    }
+
+    .mobile-menu-bg-hidden{
+        display: none;
+        animation: closeBgMenu 0.4s ease;
+    }
+
+    .mobile-menu-bg-visible{
+        display: block;
+        animation: displayBgMenu 0.4s ease;
+    }
+
+
+    @keyframes displayBgMenu{
+        from{
+            opacity: 0;
+        }
+        to{
+            opacity: 1;
+        }
+    }
+
+    @keyframes closeBgMenu{
+        from{
+            display: block;
+            opacity: 1;
+        }
+        to{
+            display: none;
+            opacity: 0;
+        }
+    } 
+
+
+    @media (min-width:760px){
+        .menu{
+            position: relative;
+            left: 0;
+            top: 0;
+            translate: 0;
+            animation: none;
+            width: auto;
+            background: none;
+
+
+            font-size: var(--fs-14);
+            color: var(--clr-grayish-blue);
+
+            display: flex;
+            gap: 2rem;
+            padding: 0;
+        }
+
+
+        .menu li:not(:last-child){
+        margin-bottom: 0;
+        }
+
+        .menu li:hover{
+            color: var(--clr-dark-blue);
+        }
+
+        .menu li{
+            position: relative;
+        }
+
+        .menu li::after{
+            content: '';
+            width: 100%;
+            height: 4px;
+            background-color: var(--clr-lime-green);
+            position: absolute;
+            left: 0;
+            top: 44px;
+            scale: 1 0;
+            transform-origin: bottom;
+            transition: scale 0.2s ease;
+        }
+
+        .menu li:hover::after{
+            scale: 1 1;
+        }
+
+        .nav-btns :not(:first-child){
+        display: none;
+    }
+
+        .btn{
+        display: block;
+        }
+    }
+
+</style>
+
+<script lang="ts">
+document.addEventListener('DOMContentLoaded', () => {
+    const menu = document.querySelector('.menu');
+    const openMenu = document.querySelector('.btn-open-menu');
+    const closeMenu = document.querySelector('.btn-close-menu');
+    const menuBg = document.querySelector('.mobile-menu-bg');
+
+    if (menu && openMenu && closeMenu && menuBg) {
+        function toggleMenu(isOpen) {
+            menu.classList.toggle('menu-hidden', !isOpen);
+            menu.classList.toggle('menu-visible', isOpen);
+
+            openMenu.classList.toggle('visible-menu-btn', !isOpen);
+            openMenu.classList.toggle('hidden-menu-btn', isOpen);
+
+            closeMenu.classList.toggle('hidden-menu-btn', !isOpen);
+            closeMenu.classList.toggle('visible-menu-btn', isOpen);
+
+            menuBg.classList.toggle('mobile-menu-bg-hidden', !isOpen);
+            menuBg.classList.toggle('mobile-menu-bg-visible', isOpen);
+        }
+
+        openMenu.addEventListener('click', () => toggleMenu(true));
+        closeMenu.addEventListener('click', () => toggleMenu(false));
+    } else {
+        console.error("One or more required elements are missing in the DOM.");
+    }
+});
+</script>

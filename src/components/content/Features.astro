@@ -1,0 +1,37 @@
+---
+import features from "../../datas/features.json";
+---
+
+
+  {features.map((feature) => (
+    <div class="feature grid-flow">
+      <img src={feature.featureIcon} alt={feature.featureTitle} />
+      <h3>{feature.featureTitle}</h3>
+      <p>{feature.featureDescr}</p>
+    </div>
+  ))}
+
+
+
+<style>
+
+    .feature{
+        max-width: 35ch;
+        justify-items: center;
+        --gap:1rem;
+    }
+
+    .feature h3{
+        font-size: var(--fs-20);
+    }
+
+    @media(min-width:760px) {
+
+        .feature{
+            justify-items: start;
+        }
+
+    }
+
+
+</style>
